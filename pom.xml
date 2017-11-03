@@ -9,9 +9,10 @@
     <name>jOOQ DSL</name>
 
     <properties>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.jooq.version>3.10.1</org.jooq.version>
-        <h2.version>1.4.195</h2.version>
+        <postgresql.version>9.4-1206-jdbc42</postgresql.version>
     </properties>
 
     <dependencies>
@@ -23,36 +24,21 @@
             <version>${org.jooq.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
-        </dependency>
-
-        <!-- Logging -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-        </dependency>
-
         <!-- Testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
-            <type>jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-junit</artifactId>
             <version>2.0.0.0</version>
-            <type>jar</type>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -123,11 +109,10 @@
                 <artifactId>sql-maven-plugin</artifactId>
                 <version>1.5</version>
 
+
                 <configuration>
                     <skip>${maven.test.skip}</skip>
-                    <forkMode>always</forkMode>
                 </configuration>
-
                 <executions>
                     <execution>
                         <id>create-database-h2</id>
@@ -136,7 +121,7 @@
                             <goal>execute</goal>
                         </goals>
                         <configuration>
-                            <driver>${db.driver}</driver>
+                            <driver>org.postgresql.Driver</driver>
                             <url>${db.url}</url>
                             <username>${db.username}</username>
                             <password>${db.password}</password>
@@ -146,7 +131,7 @@
 
                             <autocommit>true</autocommit>
                             <srcFiles>
-                                <srcFile>src/main/resources/db-h2.sql</srcFile>
+                                <srcFile>src/main/resources/db-pg.sql</srcFile>
                             </srcFiles>
                         </configuration>
                     </execution>
@@ -154,9 +139,9 @@
 
                 <dependencies>
                     <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>${h2.version}</version>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>${postgresql.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -183,10 +168,7 @@
                             </jdbc>
                             <generator>
                                 <database>
-                                    <name>org.jooq.util.h2.H2Database</name>
-                                    <includes>.*</includes>
-                                    <excludes></excludes>
-                                    <inputSchema>PUBLIC</inputSchema>
+                                    <inputSchema>public</inputSchema>
                                     <recordTimestampFields>REC_TIMESTAMP</recordTimestampFields>
                                 </database>
                                 <generate>
@@ -205,9 +187,9 @@
 
                 <dependencies>
                     <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>${h2.version}</version>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>${postgresql.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

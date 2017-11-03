@@ -15,8 +15,8 @@ class TestConfig {
 
                 connection = DriverManager.getConnection(
                         properties().getProperty("db.url"),
-                        properties().getProperty("db.username"),
-                        properties().getProperty("db.password"));
+                        properties().getProperty("db.appname"),
+                        properties().getProperty("db.apppassword"));
                 connection.setAutoCommit(false);
             }
             catch (Exception e) {
