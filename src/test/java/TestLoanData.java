@@ -21,7 +21,11 @@ public class TestLoanData {
                 .fetchInto(Loan.class);
         assertThat(loanData.size(), greaterThan(9));
 
+        loanData.forEach(Object::toString);
+
         System.out.println("loanData.count = " + dsl.fetchCount(LOAN));
+
+
     }
 
 }

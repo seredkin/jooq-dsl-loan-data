@@ -77,7 +77,7 @@ CREATE TABLE "loan" (
 	"inq_last_12m"	NUMERIC
 );
 
-copy loan FROM 'C:\tmp\loan.csv' DELIMITER ',' HEADER CSV;
+copy loan FROM '/tmp/loan.csv' DELIMITER ',' HEADER CSV;
 
 CREATE INDEX idx_loan_id ON loan (
 	id
