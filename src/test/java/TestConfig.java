@@ -31,7 +31,7 @@ class TestConfig {
         if (properties == null) {
             try {
                 properties = new Properties();
-                properties.load(TestConfig.class.getResourceAsStream("/config.properties"));
+                properties.load(TestConfig.class.getResourceAsStream("/jooq-build-dsl.properties"));
             }
             catch (Exception e) {
                 throw new RuntimeException(e);
