@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.util.Properties;
 
 
-class TestConfig {
+class JooqConfig {
 
     private static Properties properties;
     private static Connection connection;
@@ -15,8 +15,8 @@ class TestConfig {
 
                 connection = DriverManager.getConnection(
                         properties().getProperty("db.url"),
-                        properties().getProperty("db.appname"),
-                        properties().getProperty("db.apppassword"));
+                        properties().getProperty("db.username"),
+                        properties().getProperty("db.password"));
                 connection.setAutoCommit(false);
             }
             catch (Exception e) {
@@ -27,11 +27,15 @@ class TestConfig {
         return connection;
     }
 
+    static String fileName(){
+        return properties().getProperty("import.file");
+    }
+
     private static Properties properties(){
         if (properties == null) {
             try {
                 properties = new Properties();
-                properties.load(TestConfig.class.getResourceAsStream("/jooq-build-dsl.properties"));
+                properties.load(JooqConfig.class.getResourceAsStream("jooq-build-dsl.properties"));
             }
             catch (Exception e) {
                 throw new RuntimeException(e);

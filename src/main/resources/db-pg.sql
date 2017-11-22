@@ -1,7 +1,8 @@
 DROP TABLE IF EXISTS LOAN;
 
+
 CREATE TABLE "loan" (
-	"id"	BIGINT,
+	"id"	BIGSERIAL PRIMARY KEY,
 	"member_id"	NUMERIC,
 	"loan_amnt"	NUMERIC,
 	"funded_amnt"	NUMERIC,
@@ -77,13 +78,13 @@ CREATE TABLE "loan" (
 	"inq_last_12m"	NUMERIC
 );
 
-copy loan FROM '/tmp/loan.csv' DELIMITER ',' HEADER CSV;
-
-CREATE INDEX idx_loan_id ON loan (
-	id
-);
-
-alter table loan owner to loan_data;
+-- copy loan FROM '/tmp/loan.csv' DELIMITER ',' HEADER CSV;
+--
+-- CREATE INDEX idx_loan_id ON loan (
+-- 	id
+-- );
+--
+-- alter table loan owner to loan_data;
 
 
 
